@@ -389,6 +389,9 @@ Media Queries
 	.main-point {margin-bottom: 40px;}
 	.video-container {margin-bottom: 40px;}
 	.img-thumbnail {margin: 0;}
+	.navbar-brand {
+		margin-top:0px;
+	}
 }
 
 /* ------ Mobile Portrait Size to Mobile Landscape Size (devices and browsers) ------*/
@@ -409,4 +412,12 @@ Media Queries
 	.testimonial-inner img {float: none; margin:0 auto; margin-bottom: 20px;}
 	.contact-list, .quick-links {margin-bottom: 30px;}
 	.copyright {float: none;}
+	.navbar-brand {
+		margin-top:0px;
+	}
+}
+
+.navbar-toggle {
+	margin-top: 27.5px;
+	margin-bottom:27.5px;
 }

@@ -36,10 +36,15 @@ h1 {
 	z-index: 0;
 	width: 100%;
 	height: calc(100% - 70px);
-	overflow: hidden;
+	overflow-x: hidden;
 	position:absolute;
 	transition: margin-left 1s;
 	padding-top: 20px;
+ }
+ @media only screen and (max-width: 767px) {
+	.slide {
+		height: calc(100% - 100px);
+	}
  }
  .first-slide {
 	margin-left:0%;
