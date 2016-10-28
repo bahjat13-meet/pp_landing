@@ -50,7 +50,7 @@
 			$("#emailForm input,#emailForm button").attr('disabled', '');
 			var l = Ladda.create( document.querySelector( '#emailForm [type="button"]' ) );
 			l.start();
-			//TODO: submit emailForm
+			//TODO: submit emailForm in AJAX
 			setTimeout(function() {
 				l.stop();
 				$("#emailForm input,#emailForm button").attr('disabled', '');
@@ -61,7 +61,7 @@
 			$("#confForm input,#confForm button").attr('disabled', '');
 			var l = Ladda.create( document.querySelector( '#confForm [type="button"]' ) );
 			l.start();
-			//TODO: submit confForm
+			//TODO: submit confForm in AJAX
 			setTimeout(function() {
 				l.stop();
 				$("#confForm input,#confForm button").attr('disabled', '');
@@ -79,7 +79,7 @@
 			$("#nameForm input,#nameForm button").attr('disabled', '');
 			var l = Ladda.create( document.querySelector( '#nameForm [type="button"]' ) );
 			l.start();
-			//TODO: submit nameForm
+			//TODO: submit nameForm in AJAX
 			setTimeout(function() {
 				l.stop();
 				$("#nameForm input,#nameForm button").attr('disabled', '');
@@ -90,7 +90,7 @@
 			$("#phoneForm input,#phoneForm button").attr('disabled', '');
 			var l = Ladda.create( document.querySelector( '#phoneForm [type="button"]' ) );
 			l.start();
-			//TODO: submit phoneForm
+			//TODO: submit phoneForm in AJAX
 			setTimeout(function() {
 				l.stop();
 				$("#phoneForm input,#phoneForm button").attr('disabled', '');
@@ -98,6 +98,10 @@
 			}, 2000);
 		}
 		$(document).ready(function() {
+			$("form").on('submit', function(e) {
+				e.preventDefault();
+				$("#" + this.id + " [type='button']").focus().trigger('click');
+			});
 			$(".conf-text").on('keyup', function(e) {
 				if(e.keyCode != 8 && this.id!="conf6")
 					$("#conf" + (parseInt(this.id.substring(4)) + 1)).focus();
