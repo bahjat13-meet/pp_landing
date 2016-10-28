@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Purim Project</title>
+	<meta name="author" content="">
+	<meta name="keywords" content="">
+	<meta name="description" content="">		
+	
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">		
+	
+	<!-- Libs CSS -->
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/simple-line-icons.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/prettyPhoto.css" rel="stylesheet" type="text/css" media="all" />
+	
+	<!-- Template CSS -->
+	<link href="css/style.css" rel="stylesheet"> 
+	<link href="css/slides.css" rel="stylesheet"> 
+	<link href="css/ladda-themeless.min.css" rel="stylesheet" type="text/css" />
+
+	<!-- Google Fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Raleway:400,700,800&amp;subsetting=all' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,800,700,300' rel='stylesheet' type='text/css'>
+	
+	<script src="./js/jquery-2.1.0.min.js"></script>
+	<script src="./js/spin.min.js"></script>
+	<script src="./js/ladda.min.js"></script>
+
+	<!--[if lt IE 9]>
+		<script src="./js/html5shiv.js"></script>
+		<script src="./js/respond.js"></script>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<![endif]-->
+	<script type="text/javascript">
+		var currentSlide = 0;
+		var slides = [".first-slide", ".second-slide", ".third-slide"];
+		function nextSlide() {
+			$(".navbar-nav li:nth-child(" + (currentSlide+1) + ")").removeClass("active");
+			$(".navbar-nav li:nth-child(" + (currentSlide+2) + ")").addClass("active");
+			$(slides[currentSlide]).css('margin-left', '-100%');
+			$(slides[currentSlide+1]).css('margin-left', '0%');
+			currentSlide++;
+		}
+		function submitEmail() {
+			$("#emailForm input,#emailForm button").attr('disabled', '');
+			var l = Ladda.create( document.querySelector( '#emailForm [type="button"]' ) );
+			l.start();
+			//TODO: submit emailForm
+			setTimeout(function() {
+				l.stop();
+				$("#emailForm input,#emailForm button").attr('disabled', '');
+				$('#conf-row').show(500);
+			}, 2000);
+		}
+		function confEmail() {
+			$("#confForm input,#confForm button").attr('disabled', '');
+			var l = Ladda.create( document.querySelector( '#confForm [type="button"]' ) );
+			l.start();
+			//TODO: submit confForm
+			setTimeout(function() {
+				l.stop();
+				$("#confForm input,#confForm button").attr('disabled', '');
+				nextSlide();
+			}, 2000);
+			/*
+			FAIL FUNCTION : function() {
+				l.stop();
+				$("#confForm input").val('');
+				$("#confForm input,#confForm button").removeAttr('disabled');
+			}
+			*/
+		}
+		$(document).ready(function() {
+			$(".conf-text").on('keyup', function(e) {
+				if(e.keyCode != 8 && this.id!="conf6")
+					$("#conf" + (parseInt(this.id.substring(4)) + 1)).focus();
+				else if(e.keyCode == 8 && this.id!="conf1")
+					$("#conf" + (parseInt(this.id.substring(4)) - 1)).focus();
+			});
+		});
+	</script>
+</head>
+<body onload="">
+	<div id="header">
+		<nav class="navbar navbar-inverse navbar-top scroll-fixed-navbar" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<!-- Start Logo / Text -->
+					<a class="navbar-brand text-logo" href="#"><img src="img/pp_logo.png" style="width:268px;height:45px;"></a>
+					<!-- End Logo / Text -->
+				</div>
+				<!-- Start Navigation -->
+				<div class="navigation navbar-collapse collapse">
+					<ul class="nav navbar-nav menu-right">
+						<li class="active"><a>Email</a></li>
+						<li><a>Name</a></li>
+						<li><a>Step 3</a></li>
+						<li><a>Step 4</a></li>
+						<li><a>Step 5</a></li>
+					</ul>
+				</div>
+				<!-- End Navigation  -->
+			</div>
+		</nav>
+	</div>
+	<div class="slide first-slide">
+		<div class="row">
+			<div class="col-lg-3">
+			</div>
+			<div class="col-lg-6">
+				<div class="col-lg-12">
+					<p class="step-count">Step <strong>1</strong> of <strong>6</strong><br></p>
+					<h1>What's your email address?</h1><br>
+					<p>Please enter your email address here, so you can confirm it and continue the sign up process.</p>
+				</div>
+				<form id="emailForm">
+				<div class="col-lg-9"><input type="text" class="form-control" placeholder="Email Address" /></div>
+				<div class="col-lg-3 text-right"><button type="button" class="btn btn-primary" onclick="submitEmail();" data-style="expand-right">Continue</button></div>
+				</form>
+			</div>
+			<div class="col-lg-3">
+			</div>
+		</div>
+		<div class="row" id="conf-row">
+			<div class="col-lg-3">
+			</div>
+			<div class="col-lg-6">
+				<div class="col-lg-12">
+					<h1>Confirm your email address</h1><br>
+					<p>You have received an email with a 6-digit confirmation code. Please enter your code below to continue the sign up process.</p>
+				</div>
+				<form id="confForm">
+				<div class="col-lg-3"></div>
+				<div class="col-lg-1"><input type="text" class="form-control text-center conf-text" maxlength="1" id="conf1" /></div>
+				<div class="col-lg-1"><input type="text" class="form-control text-center conf-text" maxlength="1" id="conf2" /></div>
+				<div class="col-lg-1"><input type="text" class="form-control text-center conf-text" maxlength="1" id="conf3" /></div>
+				<div class="col-lg-1"><input type="text" class="form-control text-center conf-text" maxlength="1" id="conf4" /></div>
+				<div class="col-lg-1"><input type="text" class="form-control text-center conf-text" maxlength="1" id="conf5" /></div>
+				<div class="col-lg-1"><input type="text" class="form-control text-center conf-text" maxlength="1" id="conf6" /></div>
+				<div class="col-lg-3"></div>
+				<div class="col-lg-12 text-center"><button type="button" class="btn btn-primary" onclick="confEmail();" data-style="expand-right">Confirm</button></div>
+				</form>
+			</div>
+			<div class="col-lg-3">
+			</div>
+		</div>
+	</div>
+	<div class="slide second-slide">
+		<div class="row">
+			<div class="col-lg-3">
+			</div>
+			<div class="col-lg-6">
+				<div class="col-lg-12">
+					<p class="step-count">Step <strong>2</strong> of <strong>6</strong><br></p>
+					<h1>What's your name?</h1><br>
+					<p>Your organization name will be visible to your organization members. Your name will be used in emails sent to you.</p>
+				</div>
+				<form id="nameForm">
+				<div class="col-lg-6"><input type="text" class="form-control" placeholder="First Name" /></div>
+				<div class="col-lg-6"><input type="text" class="form-control" placeholder="Last Name" /></div>
+				<div class="col-lg-12"><input type="text" class="form-control" placeholder="Organization Name" /></div>
+				<div class="col-lg-12 text-center"><button type="button" class="btn btn-primary" onclick="submitName();" data-style="expand-right">Continue</button></div>
+				</form>
+			</div>
+			<div class="col-lg-3">
+			</div>
+		</div>
+	</div>
+</body>
+</html>
