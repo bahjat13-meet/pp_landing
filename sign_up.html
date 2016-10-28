@@ -27,6 +27,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,800,700,300' rel='stylesheet' type='text/css'>
 	
 	<script src="./js/jquery-2.1.0.min.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
 	<script src="./js/spin.min.js"></script>
 	<script src="./js/ladda.min.js"></script>
 
@@ -74,6 +75,28 @@
 			}
 			*/
 		}
+		function submitName() {
+			$("#nameForm input,#nameForm button").attr('disabled', '');
+			var l = Ladda.create( document.querySelector( '#nameForm [type="button"]' ) );
+			l.start();
+			//TODO: submit nameForm
+			setTimeout(function() {
+				l.stop();
+				$("#nameForm input,#nameForm button").attr('disabled', '');
+				nextSlide();
+			}, 2000);
+		}
+		function submitPhone() {
+			$("#phoneForm input,#phoneForm button").attr('disabled', '');
+			var l = Ladda.create( document.querySelector( '#phoneForm [type="button"]' ) );
+			l.start();
+			//TODO: submit phoneForm
+			setTimeout(function() {
+				l.stop();
+				$("#phoneForm input,#phoneForm button").attr('disabled', '');
+				$("#finish-modal").modal("show");
+			}, 2000);
+		}
 		$(document).ready(function() {
 			$(".conf-text").on('keyup', function(e) {
 				if(e.keyCode != 8 && this.id!="conf6")
@@ -85,6 +108,22 @@
 	</script>
 </head>
 <body onload="">
+	<div class="modal fade" id="finish-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Done!</h4>
+				</div>
+				<div class="modal-body">
+					<p>You have successfully signed up for Purim Project. A member of the Purim Project team will be be in touch with you soon <i class="fa fa-smile-o"></i></p>
+					<p>Click the finish button to go back to the home page, and read more about Purim Project.</p>
+				</div>
+				<div class="modal-footer text-center">
+					<a href="index.html" class="btn btn-primary">Finish</a>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div id="header">
 		<nav class="navbar navbar-inverse navbar-top scroll-fixed-navbar" role="navigation">
 			<div class="container">
@@ -102,11 +141,9 @@
 				<!-- Start Navigation -->
 				<div class="navigation navbar-collapse collapse">
 					<ul class="nav navbar-nav menu-right">
-						<li class="active"><a>Email</a></li>
-						<li><a>Name</a></li>
+						<li class="active"><a>Step 1</a></li>
+						<li><a>Step 2</a></li>
 						<li><a>Step 3</a></li>
-						<li><a>Step 4</a></li>
-						<li><a>Step 5</a></li>
 					</ul>
 				</div>
 				<!-- End Navigation  -->
@@ -119,7 +156,7 @@
 			</div>
 			<div class="col-lg-6">
 				<div class="col-lg-12">
-					<p class="step-count">Step <strong>1</strong> of <strong>6</strong><br></p>
+					<p class="step-count">Step <strong>1</strong> of <strong>3</strong><br></p>
 					<h1>What's your email address?</h1><br>
 					<p>Please enter your email address here, so you can confirm it and continue the sign up process.</p>
 				</div>
@@ -161,7 +198,7 @@
 			</div>
 			<div class="col-lg-6">
 				<div class="col-lg-12">
-					<p class="step-count">Step <strong>2</strong> of <strong>6</strong><br></p>
+					<p class="step-count">Step <strong>2</strong> of <strong>3</strong><br></p>
 					<h1>What's your name?</h1><br>
 					<p>Your organization name will be visible to your organization members. Your name will be used in emails sent to you.</p>
 				</div>
@@ -170,6 +207,25 @@
 				<div class="col-lg-6"><input type="text" class="form-control" placeholder="Last Name" /></div>
 				<div class="col-lg-12"><input type="text" class="form-control" placeholder="Organization Name" /></div>
 				<div class="col-lg-12 text-center"><button type="button" class="btn btn-primary" onclick="submitName();" data-style="expand-right">Continue</button></div>
+				</form>
+			</div>
+			<div class="col-lg-3">
+			</div>
+		</div>
+	</div>
+	<div class="slide third-slide">
+		<div class="row">
+			<div class="col-lg-3">
+			</div>
+			<div class="col-lg-6">
+				<div class="col-lg-12">
+					<p class="step-count">Step <strong>3</strong> of <strong>3</strong><br></p>
+					<h1>One last thing...</h1><br>
+					<p>What's your phone number? It will be used to contact you, in case you don't respond to emails.</p>
+				</div>
+				<form id="phoneForm">
+				<div class="col-lg-9"><input type="text" class="form-control" placeholder="Phone Number" /></div>
+				<div class="col-lg-3 text-right"><button type="button" class="btn btn-primary" onclick="submitPhone();" data-style="expand-right">Submit</button></div>
 				</form>
 			</div>
 			<div class="col-lg-3">
